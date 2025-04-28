@@ -25,6 +25,12 @@
         .home-article-sticky-label {
             backdrop-filter: none !important;
         }
+        .description-container .description-box {
+            backdrop-filter: blur(15px); /* Background blur effect */
+            border-radius: 15px; /* Rounded corners */
+            padding: 1rem; /* Padding inside the box */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        }
     </style>
     <div class="home-banner-background transition-fade fixed top-0 left-0 w-screen h-screen scale-125 sm:scale-110 box-border will-change-transform bg-cover">
         <img src="<%- url_for(theme.home_banner.image.light) %>" alt="home-banner-background" class="w-full h-full object-cover dark:hidden">
@@ -40,16 +46,20 @@
     </div>
     <% } %>
     <div class="content mt-8 flex flex-col justify-center items-center transition-fade-down">
-        <div class="description flex flex-col justify-center items-center w-screen font-medium text-center"
-        <% if (theme.home_banner.custom_font.enable) { %>
-             style="font-family: '<%- theme.home_banner.custom_font.family %>', sans-serif; !important;"
+        <div class="description-container relative flex flex-col justify-center items-center w-screen">
+            <div class="description-box bg-background-color-transparent-50 backdrop-blur-md rounded-lg px-6 py-4 text-center">
+                <div class="description flex flex-col justify-center items-center font-medium"
+                <% if (theme.home_banner.custom_font.enable) { %>
+                     style="font-family: '<%- theme.home_banner.custom_font.family %>', sans-serif; !important;"
                 <% } %>
-        >
-            <%- theme.home_banner.title || theme.style.first_screen.description || config.description %>
-            <%# theme.style.first_screen.description is deprecated %>
-            <% if (theme.home_banner.subtitle.length !== 0) { %>
-                <p><i id="subtitle"></i></p>
-            <% } %>
+                >
+                    <%- theme.home_banner.title || theme.style.first_screen.description || config.description %>
+                    <%# theme.style.first_screen.description is deprecated %>
+                    <% if (theme.home_banner.subtitle.length !== 0) { %>
+                        <p><i id="subtitle"></i></p>
+                    <% } %>
+                </div>
+            </div>
         </div>
         <% if (theme.home_banner.social_links.enable) { %>
             <%
